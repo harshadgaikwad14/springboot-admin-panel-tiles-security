@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,7 @@ import com.example.validator.SpecialityValidator;
 @Controller
 public class SpecialityController {
 
+	Logger logger = LoggerFactory.getLogger(SpecialityController.class);
 	@Autowired
 	private SpecialityService specialityService;
 
@@ -89,16 +91,18 @@ public class SpecialityController {
 			model.setViewName("updateSpecialityPage");
 			return model;
 		}
-		
-		System.out.println("updateSpecialityForm : "+updateSpecialityForm);
 
-		specialityService.save(updateSpecialityForm);
+		System.out.println("updateSpecialityForm : " + updateSpecialityForm);
+
+		specialityService.update(updateSpecialityForm, updateSpecialityForm.getId());
 
 		return new ModelAndView("redirect:/gridViewSpeciality");
 	}
 
 	@RequestMapping(value = "/deleteSpeciality/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable("id") long id) {
+
+		logger.info("id {} : ", id);
 		specialityService.deleteById(id);
 
 		return new ModelAndView("redirect:/gridViewSpeciality");

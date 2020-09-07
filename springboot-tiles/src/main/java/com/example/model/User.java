@@ -1,88 +1,72 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+public class User implements Serializable {
 
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true)
-    private String username;
-    
-  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private String password;
+	private Long id;
 
-    @Transient
-    private String passwordConfirm;
+	private String username;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "users_roles",
-            joinColumns = {
-                    @JoinColumn(name = "user_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "role_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)})
-    private Set<Role> roles = new HashSet<>();
+	private String password;
 
-    public Long getId() {
-        return id;
-    }
+	private String passwordConfirm;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private Set<Role> roles = new HashSet<>();
 
-    public String getUsername() {
-        return username;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordConfirm="
+				+ passwordConfirm + ", roles=" + roles + "]";
+	}
 
 	
-    
-    
+	
 }

@@ -1,17 +1,13 @@
 package com.example.auth.service;
 
-import java.util.List;
-
 import com.example.model.User;
 
 public interface UserService {
-    void save(User user);
+	void save(User user);
 
-    User findByUsername(String username);
+	User findByUserName(String userName);
 
-	List<User> findAll();
-
-	User findById(long id);
+	User findByUserId(long userId);
 
 	void deleteById(long id);
 }

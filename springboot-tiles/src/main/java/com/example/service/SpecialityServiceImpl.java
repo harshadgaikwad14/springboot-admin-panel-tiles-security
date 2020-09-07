@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.model.Speciality;
 import com.example.repository.SpecialityRepository;
@@ -14,9 +15,9 @@ public class SpecialityServiceImpl implements SpecialityService {
 	private SpecialityRepository specialityRepository;
 
 	@Override
-	public void save(Speciality speciality) {
+	public long save(Speciality speciality) {
 
-		specialityRepository.save(speciality);
+		return specialityRepository.save(speciality);
 	}
 
 	@Override
@@ -24,16 +25,26 @@ public class SpecialityServiceImpl implements SpecialityService {
 		return specialityRepository.findByName(name);
 
 	}
+
 	@Override
 	public List<Speciality> findAll() {
 		return specialityRepository.findAll();
 	}
+
 	@Override
 	public Speciality findById(final long id) {
-		return specialityRepository.findById(id).get();
+		return specialityRepository.findById(id);
 	}
+
+	@Transactional
 	@Override
 	public void deleteById(long id) {
 		specialityRepository.deleteById(id);
+	}
+
+	@Override
+	public long update(Speciality speciality, long specialityId) {
+		// TODO Auto-generated method stub
+		return specialityRepository.updateById(specialityId, speciality);
 	}
 }

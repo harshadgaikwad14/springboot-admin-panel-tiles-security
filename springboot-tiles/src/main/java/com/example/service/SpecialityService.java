@@ -5,7 +5,9 @@ import java.util.List;
 import com.example.model.Speciality;
 
 public interface SpecialityService {
-	void save(Speciality speciality);
+	long save(Speciality speciality);
+
+	long update(Speciality speciality, final long id);
 
 	Speciality findByName(String name);
 
@@ -14,6 +16,5 @@ public interface SpecialityService {
 	Speciality findById(long id);
 
 	void deleteById(long id);
-	
-	 
+
 }
