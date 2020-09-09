@@ -44,10 +44,27 @@
 					<form:form method="POST"
 						action="${pageContext.request.contextPath}/createSpeciality"
 						modelAttribute="createSpecialityForm">
-
+						
+						
 						<div class="card-body">
+						<c:if test="${!empty specialityName}">
+
+								<div class="alert alert-success alert-dismissible fade show"
+									role="alert">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+
+									Speciality <strong>${specialityName}</strong> Created
+									Successfully.
+								</div>
+
+
+							</c:if>
+						
 							<spring:bind path="name">
-								<div class="form-group">
+								<div class="form-group col-md-6">
 									<label for="exampleInputEmail1">Name</label> 
 									
 									<!-- input type="text"
@@ -61,7 +78,7 @@
 						</div>
 						<!-- /.card-body -->
 						<div class="card-footer">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary">Create</button>
 						</div>
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
@@ -71,7 +88,7 @@
 			</div>
 			<!--/.col (left) -->
 			<!-- right column -->
-			<div class="col-md-6"></div>
+			
 			<!--/.col (right) -->
 		</div>
 		<!-- /.row -->

@@ -3,7 +3,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
-	<a href="index3.html" class="brand-link"> <img
+	<a href="${pageContext.request.contextPath}/" class="brand-link"> <img
 		src="${pageContext.request.contextPath}/dist/img/cairevent.jpg"
 		alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
 		style="opacity: .8"> <span class="brand-text font-weight-light">CairEvent</span>
@@ -23,7 +23,7 @@
 				<li class="nav-item"><a
 					href="${pageContext.request.contextPath}/" class="nav-link"> <i
 						class="nav-icon fas fa-tachometer-alt"></i>
-					<p>Dashboard</p>
+						<p>Dashboard</p>
 				</a></li>
 
 				<li class="nav-item has-treeview"><a href="#" class="nav-link">
@@ -33,12 +33,34 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="../layout/top-nav.html"
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/createEvent"
 							class="nav-link"> <i class="far fa-file"></i>
 								<p>Create</p>
 						</a></li>
-						
-						<li class="nav-item"><a href="../layout/boxed.html"
+
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/gridViewEvent"
+							class="nav-link"> <i class="far fa-list-alt"></i>
+								<p>List</p>
+						</a></li>
+
+					</ul></li>
+
+
+				<li class="nav-item has-treeview"><a href="#" class="nav-link">
+						<i class="fa fa-align-justify"></i>
+
+						<p> Captcha <i class="fas fa-angle-left right"></i></p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/createSpecialityCaptcha"
+							class="nav-link"> <i class="far fa-file"></i>
+								<p>Create</p>
+						</a></li>
+
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/gridViewSpecialityCaptcha"
 							class="nav-link"> <i class="far fa-list-alt"></i>
 								<p>List</p>
 						</a></li>
@@ -47,18 +69,17 @@
 
 				<li class="nav-item has-treeview"><a href="#" class="nav-link">
 						<i class="fas fa-graduation-cap"></i>
-						<p>
-							Speciality<i class="fas fa-angle-left right"></i>
-
-						</p>
+						<p> Speciality <i class="fas fa-angle-left right"></i></p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/createSpeciality"
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/createSpeciality"
 							class="nav-link"> <i class="far fa-file"></i>
 								<p>Create</p>
 						</a></li>
-						
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/gridViewSpeciality"
+
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/gridViewSpeciality"
 							class="nav-link"> <i class="far fa-list-alt"></i>
 								<p>List</p>
 						</a></li>

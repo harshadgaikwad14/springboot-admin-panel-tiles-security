@@ -134,6 +134,11 @@
 <!-- page script -->
 <script>
 	$(function() {
+
+		 //Date range picker
+	    $('#eventDate').datetimepicker({
+	        format: 'YYYY-MM-DD'
+	    });
 		
 		$('#gridViewSpecialityDataTable').DataTable({
 			"paging": true,
@@ -144,6 +149,17 @@
 		      "autoWidth": false,
 		      "responsive": true,
 		});
+
+		$('#gridViewSpecialityCaptchaDataTable').DataTable({
+			"paging": true,
+		      "lengthChange": false,
+		      "searching": false,
+		      "ordering": true,
+		      "info": true,
+		      "autoWidth": false,
+		      "responsive": true,
+		});
+		
 	});
 </script>
 

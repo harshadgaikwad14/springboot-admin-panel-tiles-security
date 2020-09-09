@@ -31,7 +31,7 @@ public class SpecialityController {
 	private SpecialityValidator specialityValidator;
 
 	@GetMapping("/createSpeciality")
-	public String registration(Model model) {
+	public String getSpeciality(Model model) {
 
 		model.addAttribute("createSpecialityForm", new Speciality());
 
@@ -39,7 +39,7 @@ public class SpecialityController {
 	}
 
 	@PostMapping("/createSpeciality")
-	public ModelAndView registration(@ModelAttribute("createSpecialityForm") Speciality createSpecialityForm,
+	public ModelAndView createSpeciality(@ModelAttribute("createSpecialityForm") Speciality createSpecialityForm,
 			BindingResult bindingResult) {
 		specialityValidator.validate(createSpecialityForm, bindingResult);
 
@@ -51,8 +51,13 @@ public class SpecialityController {
 			return model;
 		}
 
-		specialityService.save(createSpecialityForm);
+		long createstatus = specialityService.save(createSpecialityForm);
 		ModelAndView model = new ModelAndView();
+		
+		if(createstatus>0)
+		{
+			model.addObject("specialityName", createSpecialityForm.getName());
+		}
 
 		model.addObject("createSpecialityForm", new Speciality());
 		model.setViewName("createSpecialityPage");
@@ -60,7 +65,7 @@ public class SpecialityController {
 	}
 
 	@GetMapping(value = "/gridViewSpeciality")
-	public ModelAndView list() {
+	public ModelAndView gridViewSpeciality() {
 		final ModelAndView model = new ModelAndView("gridViewSpecialityPage");
 		List<Speciality> specialities = specialityService.findAll();
 		model.addObject("specialityGridData", specialities);
@@ -69,7 +74,7 @@ public class SpecialityController {
 	}
 
 	@RequestMapping(value = "/getSpeciality/{id}", method = RequestMethod.GET)
-	public ModelAndView specialityById(@PathVariable long id) {
+	public ModelAndView getSpecialityById(@PathVariable long id) {
 		ModelAndView model = new ModelAndView();
 
 		Speciality speciality = specialityService.findById(id);
@@ -80,7 +85,7 @@ public class SpecialityController {
 	}
 
 	@PostMapping("/updateSpeciality")
-	public ModelAndView updateSpecialityById(@ModelAttribute("updateSpecialityForm") Speciality updateSpecialityForm,
+	public ModelAndView updateSpeciality(@ModelAttribute("updateSpecialityForm") Speciality updateSpecialityForm,
 			BindingResult bindingResult) {
 
 		specialityValidator.validate(updateSpecialityForm, bindingResult);
@@ -94,13 +99,25 @@ public class SpecialityController {
 
 		System.out.println("updateSpecialityForm : " + updateSpecialityForm);
 
-		specialityService.update(updateSpecialityForm, updateSpecialityForm.getId());
+		 long updateStatus= specialityService.update(updateSpecialityForm, updateSpecialityForm.getId());
 
-		return new ModelAndView("redirect:/gridViewSpeciality");
+		ModelAndView model = new ModelAndView();
+		
+		
+		Speciality speciality = specialityService.findById(updateSpecialityForm.getId());
+		if(updateStatus>0)
+		{
+			model.addObject("specialityName", speciality.getName());
+		}
+		
+		model.addObject("updateSpecialityForm", speciality);
+		model.setViewName("updateSpecialityPage");
+
+		return model;
 	}
 
 	@RequestMapping(value = "/deleteSpeciality/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable("id") long id) {
+	public ModelAndView deleteSpecialityId(@PathVariable("id") long id) {
 
 		logger.info("id {} : ", id);
 		specialityService.deleteById(id);

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -26,21 +27,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/**", "/registration", "/plugins/**", "/dist/**").permitAll()
-				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-				.permitAll();
+		http.authorizeRequests()
+				.antMatchers("/resources/**", "/admin/panel/registration", "/plugins/**", "/dist/**").permitAll()
+				
+				.anyRequest().authenticated().and().formLogin().loginPage("/admin/panel/login").permitAll()
+				.and().logout().permitAll();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 
 		super.configure(web);
+		 web.ignoring().antMatchers("/api/public/**","/resources/**","/static/images/**");
 		web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
 	}
 
+	
 	@Bean
 	public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
 

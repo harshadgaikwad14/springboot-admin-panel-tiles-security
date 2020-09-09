@@ -15,7 +15,7 @@ public class Speciality implements Serializable {
 	
 	private String name;
 	
-	private String status;
+	
 
 	public Long getId() {
 		return id;
@@ -35,18 +35,7 @@ public class Speciality implements Serializable {
 	
 	
 
-	public String getStatus() {
-		return status;
-	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "Speciality [id=" + id + ", name=" + name + ", status=" + status + "]";
-	}
 
 	
 	

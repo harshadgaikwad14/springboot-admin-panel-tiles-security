@@ -14,7 +14,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>Update Speciality</h1>
+				<h1>Speciality</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -36,7 +36,7 @@
 				<!-- jquery validation -->
 				<div class="card card-primary">
 					<div class="card-header">
-						<h3 class="card-title">Edit Specicality</h3>
+						<h3 class="card-title">Update Specicality</h3>
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
@@ -47,10 +47,24 @@
 
 						<div class="card-body">
 
+							<c:if test="${!empty specialityName}">
 
+								<div class="alert alert-success alert-dismissible fade show"
+									role="alert">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+
+									Speciality <strong>${specialityName}</strong> Updated
+									Successfully.
+								</div>
+
+
+							</c:if>
 
 							<spring:bind path="id">
-								<div class="form-group">
+								<div class="form-group col-md-6">
 									<label for="specialityId">Id</label>
 									<form:hidden path="id" />
 
@@ -61,7 +75,7 @@
 							</spring:bind>
 
 							<spring:bind path="name">
-								<div class="form-group">
+								<div class="form-group col-md-6">
 									<label for="specialityName">Name</label>
 
 
@@ -73,7 +87,7 @@
 						</div>
 						<!-- /.card-body -->
 						<div class="card-footer">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary">Update</button>
 						</div>
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
@@ -83,7 +97,7 @@
 			</div>
 			<!--/.col (left) -->
 			<!-- right column -->
-			<div class="col-md-6"></div>
+
 			<!--/.col (right) -->
 		</div>
 		<!-- /.row -->

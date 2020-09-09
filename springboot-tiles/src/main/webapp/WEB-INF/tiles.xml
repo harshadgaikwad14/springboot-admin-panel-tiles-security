@@ -49,6 +49,55 @@
 			value="/WEB-INF/bodyfragments/gridViewSpeciality.jsp" />
 	</definition>
 	
+	
+	
+	
+	<definition name="createEventPage" extends="base.definition">
+		<put-attribute name="title" value="Create Event" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/create_event.jsp" />
+	</definition>
+	
+	
+	<definition name="gridViewEventPage" extends="base.definition">
+		<put-attribute name="title" value="Create Event" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/gridViewEvent.jsp" />
+	</definition>
+	
+	<definition name="updateEventPage" extends="base.definition">
+		<put-attribute name="title" value="Update Event" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/updateEvent.jsp" />
+	</definition>
+	
+	
+	
+	<definition name="createSpecialityCaptchaPage" extends="base.definition">
+		<put-attribute name="title" value="Create Speciality Captcha" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/createSpecialityCaptcha.jsp" />
+	</definition>
+	
+	
+	
+	
+	<definition name="gridViewSpecialityCaptchaPage" extends="base.definition">
+		<put-attribute name="title" value="Create Speciality" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/gridViewSpecialityCaptcha.jsp" />
+	</definition>
+	
+	
+	<definition name="updateSpecialityCaptchaPage" extends="base.definition">
+		<put-attribute name="title" value="Create Speciality" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/updateSpecialityCaptcha.jsp" />
+	</definition>
+	
+	
+	
+	
 
 	<!-- Login Layout Define -->
 	<definition name="login.layout.definition"

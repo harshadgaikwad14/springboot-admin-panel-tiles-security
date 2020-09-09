@@ -10,7 +10,7 @@
 		<p class="login-box-msg">Sign in to start your session</p>
 
 		<!-- <form action="../../index3.html" method="post"> -->
-		<form method="POST" action="${pageContext.request.contextPath}/login"
+		<form method="POST" action="${pageContext.request.contextPath}/admin/panel/login"
 			class="form-signin">
 			<div class="input-group mb-3">
 				<input type="text" name="username" class="form-control"
@@ -54,7 +54,7 @@
 			<a href="forgot-password.html">I forgot my password</a>
 		</p>
 		<p class="mb-0">
-			<a href="${pageContext.request.contextPath}/registration"
+			<a href="${pageContext.request.contextPath}/admin/panel/registration"
 				class="text-center">Register a new membership</a>
 		</p>
 	</div>

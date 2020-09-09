@@ -17,7 +17,7 @@
 	<div class="card-body register-card-body">
 		<p class="login-box-msg">Register a new membership</p>
 
-		<form:form method="POST" action="${pageContext.request.contextPath}/registration" modelAttribute="userForm" class="form-signin">
+		<form:form method="POST" action="${pageContext.request.contextPath}/admin/panel/registration" modelAttribute="userForm" class="form-signin">
 			
 			
 			
@@ -88,7 +88,7 @@
 		</form:form>
 
 
-		<a href="${contextPath}/login" class="text-center">I already have
+		<a href="${contextPath}/admin/panel/login" class="text-center">I already have
 			a membership</a>
 	</div>
 	<!-- /.form-box -->
