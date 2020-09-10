@@ -13,8 +13,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.example.model.Speciality;
+import com.example.model.SpecialityCaptchaDTO;
 import com.example.rowMapper.SpecialityRowMapper;
 
 @Repository
@@ -27,6 +29,10 @@ public class SpecialityRepository {
 
 	@Autowired
 	private SpecialityRowMapper specialityRowMapper;
+	
+	@Autowired
+	private SpecialityCaptchaRepository specialityCaptchaRepository;
+	
 
 	public List<Speciality> findAll() {
 		final String userQuery = "SELECT id, name FROM speciality";
@@ -111,7 +117,15 @@ public class SpecialityRepository {
 			return 0;
 		}
 		
+		List<SpecialityCaptchaDTO> exSpCap = specialityCaptchaRepository.findAllBySpecialityId(specialityId);
+		int count = specialityCaptchaRepository.getCountBySpecialityId(specialityId);
 		
+		
+		if(count>0)
+		{
+			logger.info("exSpCap : {} ", exSpCap);
+			return -1;
+		}
 
 		final String userQuery = "DELETE FROM speciality WHERE  id=:specialityId";
 

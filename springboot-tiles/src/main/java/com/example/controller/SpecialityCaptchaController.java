@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -250,13 +251,13 @@ public class SpecialityCaptchaController {
 	}
 
 	@GetMapping(value = "/gridViewSpecialityCaptcha")
-	public ModelAndView inputProduct() {
+	public ModelAndView gridViewSpecialityCaptcha(@RequestParam(required = false) String message) {
 		final ModelAndView model = new ModelAndView("gridViewSpecialityCaptchaPage");
 
 		final List<SpecialityCaptchaDTO> specialityCaptchaList = specialityCaptchaService.findAll();
 		
 		model.addObject("specialityCaptchaGridData", specialityCaptchaList);
-
+		model.addObject("message", message);
 		return model;
 	}
 	
@@ -264,9 +265,23 @@ public class SpecialityCaptchaController {
 	public ModelAndView deleteSpecialityCaptcha(@PathVariable("id") long id) {
 
 		logger.info("deleteSpecialityCaptcha - id {} : ", id);
-		specialityCaptchaService.deleteById(id);
+		int deletestatus = specialityCaptchaService.deleteById(id);
+		
+		logger.info("deletestatus {} : ", deletestatus);
 
-		return new ModelAndView("redirect:/gridViewSpecialityCaptcha");
+		String message = "FAILED";
+
+		if (deletestatus == -1) {
+
+			message = "INUSED";
+
+		} else if (deletestatus == 1) {
+
+			message = "SUCCESS";
+
+		}
+
+		return new ModelAndView("redirect:/gridViewSpecialityCaptcha?message=" + message);
 	}
 	
 

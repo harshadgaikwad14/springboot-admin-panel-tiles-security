@@ -47,6 +47,45 @@
 					<div class="card-body">
 
 
+						<c:if test="${message == 'INUSED'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Speciality Already In Use.
+							</div>
+
+						</c:if>
+
+						<c:if test="${message == 'SUCCESS'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Speciality Successfully deleted.
+							</div>
+
+						</c:if>
+						
+						<c:if test="${message == 'FAILED'}">
+							<div class="alert alert-warning alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Speciality failed to delete.
+							</div>
+
+						</c:if>
+
 						<c:if test="${!empty specialityGridData}">
 							<table id="gridViewSpecialityDataTable"
 								class="table table-bordered table-hover">
@@ -94,23 +133,25 @@
 						<c:if test="${empty specialityGridData}">
 
 							<div class="error-page">
-								
+
 
 								<div class="error-content">
 									<h3>
-										<i class="fas fa-exclamation-triangle text-warning"></i> No Records Found.
+										<i class="fas fa-exclamation-triangle text-warning"></i> No
+										Records Found.
 									</h3>
 
 									<p>
 										We could not find the records you were looking for. Meanwhile,
-										you may <a href="${createSpeciality}"> create new speciality</a> 
+										you may <a href="${createSpeciality}"> create new
+											speciality</a>
 									</p>
 
 								</div>
 								<!-- /.error-content -->
 							</div>
 
-							</c:if>
+						</c:if>
 					</div>
 					<!-- /.card-body -->
 				</div>

@@ -38,60 +38,56 @@
 
 
 					<div class="card-header">
-						<h3 class="card-title">Grid View Of Speciality</h3>
-						<spring:url value="/createSpeciality" var="createSpeciality" />
-						<a class="text-center float-right" href="${createSpeciality }">Create
-							Speciality</a>
+						<h3 class="card-title">Grid View Of Dashboard</h3>
+						
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
 
 
-						<c:if test="${!empty specialityGridData}">
-							<table id="gridViewSpecialityDataTable"
+						<c:if test="${!empty eventShareGridData}">
+							<table id="gridViewEventShareGridDataTable"
 								class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										<th>Id</th>
-										<th>Name</th>
-										<th>Update</th>
-										<th>Delete</th>
+										<th>EventShareId</th>
+										<th>EventShareDate</th>
+										<th>EventName</th>
+										<th>EventDate</th>
+										<th>ClientName</th>
+										<th>EventShareCount</th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${specialityGridData }" var="speciality">
+									<c:forEach items="${eventShareGridData }" var="eventShare">
 										<tr>
-											<td>${speciality.id}</td>
-											<td>${speciality.name}</td>
-											<th><spring:url value="getSpeciality/${speciality.id }"
-													var="updateURL" /> <a class="btn btn-xs"
-												href="${updateURL }"> <i class="fas fa-edit"></i>
-											</a></th>
-											<th><spring:url
-													value="deleteSpeciality/${speciality.id }" var="deleteURL" />
-
-
-
-												<a class="btn btn-xs" href="${deleteURL }"> <i
-													class="fa fa-trash"></i>
-											</a></th>
+											<td>${eventShare.eventShareId}</td>
+											<td>${eventShare.eventShareDate}</td>
+											<td>${eventShare.eventName}</td>
+											<td>${eventShare.eventDate}</td>
+											<td>${eventShare.drName}</td>
+											<td>${eventShare.eventShareCount}</td>
+											
+											
 										</tr>
 
 									</c:forEach>
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>Id</th>
-										<th>Name</th>
-										<th>Update</th>
-										<th>Delete</th>
+										<th>EventShareId</th>
+										<th>EventShareDate</th>
+										<th>EventName</th>
+										<th>EventDate</th>
+										<th>ClientName</th>
+										<th>EventShareCount</th>
 
 									</tr>
 								</tfoot>
 							</table>
 						</c:if>
-						<c:if test="${empty specialityGridData}">
+						<c:if test="${empty eventShareGridData}">
 
 							<div class="error-page">
 								
@@ -102,8 +98,7 @@
 									</h3>
 
 									<p>
-										We could not find the records you were looking for. Meanwhile,
-										you may <a href="${createSpeciality}"> create new speciality</a> 
+										We could not find the records you were looking for.</a> 
 									</p>
 
 								</div>

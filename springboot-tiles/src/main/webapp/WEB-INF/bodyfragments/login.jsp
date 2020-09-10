@@ -50,9 +50,9 @@
 
 
 
-		<p class="mb-1">
+		<!-- <p class="mb-1">
 			<a href="forgot-password.html">I forgot my password</a>
-		</p>
+		</p> -->
 		<p class="mb-0">
 			<a href="${pageContext.request.contextPath}/admin/panel/registration"
 				class="text-center">Register a new membership</a>

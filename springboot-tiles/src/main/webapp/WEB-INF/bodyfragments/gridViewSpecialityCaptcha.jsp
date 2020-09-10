@@ -40,11 +40,50 @@
 					<div class="card-header">
 						<h3 class="card-title">Grid View Of Captcha</h3>
 						<spring:url value="/createSpeciality" var="createSpeciality" />
-						<a class="text-center float-right" href="${contextPath}/createSpecialityCaptcha">Create
-							Captcha</a>
+						<a class="text-center float-right"
+							href="${contextPath}/createSpecialityCaptcha">Create Captcha</a>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
+
+						<c:if test="${message == 'INUSED'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Captcha Already In Use.
+							</div>
+
+						</c:if>
+
+						<c:if test="${message == 'SUCCESS'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Captcha Successfully deleted.
+							</div>
+
+						</c:if>
+
+						<c:if test="${message == 'FAILED'}">
+							<div class="alert alert-warning alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Captcha failed to delete.
+							</div>
+
+						</c:if>
 
 
 						<c:if test="${!empty specialityCaptchaGridData}">
@@ -61,23 +100,22 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${specialityCaptchaGridData }" var="specialityCaptcha">
+									<c:forEach items="${specialityCaptchaGridData }"
+										var="specialityCaptcha">
 										<tr>
 											<td>${specialityCaptcha.id}</td>
 											<td>${specialityCaptcha.captchaText}</td>
 											<td>${specialityCaptcha.specialityName}</td>
-											
-											<th><spring:url value="getSpecialityCaptcha/${specialityCaptcha.id }"
+
+											<th><spring:url
+													value="getSpecialityCaptcha/${specialityCaptcha.id }"
 													var="updateURL" /> <a class="btn btn-xs"
 												href="${updateURL }"> <i class="fas fa-edit"></i>
 											</a></th>
 											<th><spring:url
-													value="deleteSpecialityCaptcha/${specialityCaptcha.id }" var="deleteURL" />
-
-
-
-												<a class="btn btn-xs" href="${deleteURL }"> <i
-													class="fa fa-trash"></i>
+													value="deleteSpecialityCaptcha/${specialityCaptcha.id }"
+													var="deleteURL" /> <a class="btn btn-xs"
+												href="${deleteURL }"> <i class="fa fa-trash"></i>
 											</a></th>
 										</tr>
 
@@ -98,23 +136,25 @@
 						<c:if test="${empty specialityCaptchaGridData}">
 
 							<div class="error-page">
-								
+
 
 								<div class="error-content">
 									<h3>
-										<i class="fas fa-exclamation-triangle text-warning"></i> No Records Found.
+										<i class="fas fa-exclamation-triangle text-warning"></i> No
+										Records Found.
 									</h3>
 
 									<p>
 										We could not find the records you were looking for. Meanwhile,
-										you may <a href="${contextPath}/createSpecialityCaptcha"> create new captcha</a> 
+										you may <a href="${contextPath}/createSpecialityCaptcha">
+											create new captcha</a>
 									</p>
 
 								</div>
 								<!-- /.error-content -->
 							</div>
 
-							</c:if>
+						</c:if>
 					</div>
 					<!-- /.card-body -->
 				</div>

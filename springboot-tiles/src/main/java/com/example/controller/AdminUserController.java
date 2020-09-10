@@ -25,6 +25,8 @@ public class AdminUserController {
 
 	@Autowired
 	private UserValidator userValidator;
+	
+	
 
 	@GetMapping("/registration")
 	public String registration(Model model) {

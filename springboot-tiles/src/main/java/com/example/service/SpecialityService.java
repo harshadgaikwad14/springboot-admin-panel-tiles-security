@@ -15,6 +15,6 @@ public interface SpecialityService {
 
 	Speciality findById(long id);
 
-	void deleteById(long id);
+	long deleteById(long id);
 
 }

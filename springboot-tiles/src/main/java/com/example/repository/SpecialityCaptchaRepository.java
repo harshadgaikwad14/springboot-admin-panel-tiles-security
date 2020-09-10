@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -59,6 +60,19 @@ public class SpecialityCaptchaRepository {
 		}
 
 		return Collections.emptyList();
+	}
+
+	public int getCountBySpecialityId(long specialityId) {
+		String sql = "SELECT count(*) as cnt FROM spciality_captcha sc left outer join speciality s on sc.speciality_id = s.id WHERE  sc.speciality_id=:specialityId";
+		SqlParameterSource namedParameters = new MapSqlParameterSource("specialityId", specialityId);
+		final SqlRowSet sqlRowSet = namedParameterJdbcTemplate.queryForRowSet(sql, namedParameters);
+		int dataCount = 0;
+		while (sqlRowSet.next()) {
+			dataCount = Integer.parseInt(sqlRowSet.getString("cnt"));
+
+		}
+
+		return dataCount;
 	}
 
 	public SpecialityCaptchaDTO findByCaptchaTxtAndSpecialityId(final String captchaTxt, long specialityId) {
@@ -150,8 +164,8 @@ public class SpecialityCaptchaRepository {
 
 		SpecialityCaptchaDTO exSpecialityCaptchaDTO = findById(specialityCaptchaId);
 
-		if (exSpecialityCaptchaDTO != null) {
-			return -1;
+		if (exSpecialityCaptchaDTO == null) {
+			return 0;
 		}
 
 		final String userQuery = "DELETE FROM spciality_captcha WHERE id=:specialityCaptchaId";

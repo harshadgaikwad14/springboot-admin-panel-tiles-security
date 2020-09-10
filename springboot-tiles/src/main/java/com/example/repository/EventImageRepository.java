@@ -10,8 +10,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.example.model.EventImageDTO;
 import com.example.rowMapper.EventImageRowMapper;
@@ -92,6 +94,19 @@ public class EventImageRepository {
 		return null;
 
 	}
+	
+	 public int getCountByEventId(long eventId){
+		  String sql = "SELECT count(*) as cnt FROM event_img WHERE  event_id=:eventId";
+		  SqlParameterSource namedParameters = new MapSqlParameterSource("eventId", eventId);
+		  final SqlRowSet sqlRowSet = namedParameterJdbcTemplate.queryForRowSet(sql, namedParameters);
+		  int dataCount = 0;
+		  while(sqlRowSet.next()) {
+			  dataCount = Integer.parseInt(sqlRowSet.getString("cnt"));
+			  
+			}
+		  
+		  return dataCount;
+	    }
 
 	@Transactional
 	public long save(EventImageDTO eventImageDTO) {
@@ -113,12 +128,29 @@ public class EventImageRepository {
 		EventImageDTO eventImageDTO = findById(eventImageId);
 
 		if (eventImageDTO == null) {
-			return -1;
+			return 0;
 		}
 
 		final String userQuery = "DELETE FROM event_img WHERE id=:eventImageId";
 
 		final SqlParameterSource parameters = new MapSqlParameterSource("eventImageId", eventImageId);
+
+		final int deleteStatus = namedParameterJdbcTemplate.update(userQuery, parameters);
+		logger.info("deleteStatus : {} ", deleteStatus);
+		return deleteStatus;
+	}
+	@Transactional
+	public int deleteByEventId(long eventId) {
+
+		List<EventImageDTO> list = findByEventId(eventId);
+
+		if (CollectionUtils.isEmpty(list)) {
+			return 0;
+		}
+
+		final String userQuery = "DELETE FROM event_img WHERE event_id=:eventId";
+
+		final SqlParameterSource parameters = new MapSqlParameterSource("eventId", eventId);
 
 		final int deleteStatus = namedParameterJdbcTemplate.update(userQuery, parameters);
 		logger.info("deleteStatus : {} ", deleteStatus);

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -217,12 +218,13 @@ public class EventController {
 	}
 
 	@GetMapping(value = "/gridViewEvent")
-	public ModelAndView gridViewEvent() {
+	public ModelAndView gridViewEvent(@RequestParam(required = false) String message) {
 		final ModelAndView model = new ModelAndView("gridViewEventPage");
 
 		final List<EventDTO> events = eventService.findAll();
 
 		model.addObject("eventGridData", events);
+		model.addObject("message", message);
 
 		return model;
 	}
@@ -232,8 +234,19 @@ public class EventController {
 
 		logger.info("deleteEvent - id {} : ", id);
 		int deleteStatus = eventService.deleteById(id);
+		String message = "FAILED";
 
-		return new ModelAndView("redirect:/gridViewEvent").addObject("deleteStatus", deleteStatus);
+		if (deleteStatus == -1) {
+
+			message = "INUSED";
+
+		} else if (deleteStatus == 1) {
+
+			message = "SUCCESS";
+
+		}
+
+		return new ModelAndView("redirect:/gridViewEvent?message=" + message);
 	}
 	
 	@GetMapping(value = "/deleteEventImage/{id}/{imageId}")
@@ -242,6 +255,8 @@ public class EventController {
 		logger.info("deleteEvent - id {} : ", id);
 		logger.info("deleteEvent - imageId {} : ", imageId);
 		int deleteStatus = eventService.deleteByEventImageId(id,imageId);
+		
+		
 
 		return new ModelAndView("redirect:/getEvent/"+id).addObject("deleteStatus", deleteStatus);
 	}

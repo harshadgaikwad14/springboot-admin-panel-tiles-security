@@ -32,9 +32,9 @@ public class SpecialityCaptchaServiceImpl implements SpecialityCaptchaService {
 	}
 
 	@Override
-	public void deleteById(long specialityCaptchaId) {
+	public int deleteById(long specialityCaptchaId) {
 		// TODO Auto-generated method stub
-		specialityCaptchaRepository.deleteById(specialityCaptchaId);
+		return  specialityCaptchaRepository.deleteById(specialityCaptchaId);
 	}
 
 	@Override

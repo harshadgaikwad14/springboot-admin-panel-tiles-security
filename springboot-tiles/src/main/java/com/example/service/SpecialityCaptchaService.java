@@ -16,6 +16,6 @@ public interface SpecialityCaptchaService {
 
 	List<SpecialityCaptchaDTO> findAllBySpecialityId(long specialityId);
 
-	void deleteById(long id);
+	int deleteById(long id);
 
 }

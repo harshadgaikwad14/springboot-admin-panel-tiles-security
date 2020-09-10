@@ -145,22 +145,32 @@ public class EventRepository {
 
 		return updateStatus;
 	}
-
+@Transactional
 	public int deleteById(long eventId) {
 
 		EventDTO eventDTO = findById(eventId);
 
 		if (eventDTO == null) {
-			return -1;
+			return 0;
 		}
-
+		
+		/*
+		 * int count= eventImageRepository.getCountByEventId(eventId);
+		 * 
+		 * if(count>0) { logger.info("count : {} ", count); return -1; }
+		 */
+		
+		
+		
+		eventImageRepository.deleteByEventId(eventId);
+		
 		final String userQuery = "DELETE FROM event WHERE id=:eventId";
 
 		final SqlParameterSource parameters = new MapSqlParameterSource("eventId", eventId);
 
 		final int deleteStatus = namedParameterJdbcTemplate.update(userQuery, parameters);
 
-		eventImageRepository.deleteById(eventId);
+	
 		logger.info("deleteStatus : {} ", deleteStatus);
 		return deleteStatus;
 	}

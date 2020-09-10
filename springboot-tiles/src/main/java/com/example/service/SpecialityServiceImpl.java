@@ -38,8 +38,8 @@ public class SpecialityServiceImpl implements SpecialityService {
 
 	@Transactional
 	@Override
-	public void deleteById(long id) {
-		specialityRepository.deleteById(id);
+	public long deleteById(long id) {
+		return specialityRepository.deleteById(id);
 	}
 
 	@Override

@@ -63,6 +63,11 @@
 
 							</c:if>
 
+							
+
+
+
+
 							<spring:bind path="id">
 								<div class="form-group col-md-6">
 									<label for="specialityId">Id</label>
