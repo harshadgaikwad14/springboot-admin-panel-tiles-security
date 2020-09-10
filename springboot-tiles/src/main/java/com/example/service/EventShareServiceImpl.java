@@ -19,7 +19,7 @@ public class EventShareServiceImpl implements EventShareService {
 	@Override
 	public long save(EventShare eventShare) {
 		// TODO Auto-generated method stub
-		return 0;
+		return eventShareRepository.save(eventShare);
 	}
 
 	@Override

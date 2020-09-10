@@ -1,11 +1,13 @@
 package com.example.repository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -34,7 +36,8 @@ public class EventRepository {
 
 	@Autowired
 	private EventImageRepository eventImageRepository;
-
+	
+	
 	public List<EventDTO> findAll() {
 		final String userQuery = "SELECT id, event_name, event_date, modified_at FROM event order by modified_at desc";
 
@@ -42,6 +45,35 @@ public class EventRepository {
 		// userId);
 		try {
 			final List<EventDTO> eventDTOs = namedParameterJdbcTemplate.query(userQuery, eventRowMapper);
+
+			return eventDTOs;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Collections.emptyList();
+	}
+
+	public List<EventDTO> findAllByDateRange(String fromDate, String toDate) {
+		final String userQuery = "SELECT id, event_name, event_date, modified_at FROM event WHERE event_date>=:fromDate and event_date<=:toDate";
+
+		final SqlParameterSource parameters = new MapSqlParameterSource("fromDate", fromDate).addValue("toDate",
+				toDate);
+		try {
+			final List<EventDTO> eventDTOs = namedParameterJdbcTemplate.query(userQuery, parameters, eventRowMapper);
+
+			if (!CollectionUtils.isEmpty(eventDTOs)) {
+				final List<EventDTO> updatedList = new ArrayList<>();
+				for (EventDTO eventDTO : eventDTOs) {
+
+					final List<EventImageDTO> list = eventImageRepository.findByEventId(eventDTO.getId());
+					if (!CollectionUtils.isEmpty(list)) {
+						eventDTO.setImages(list);
+						updatedList.add(eventDTO);
+					}
+				}
+				return updatedList;
+			}
 
 			return eventDTOs;
 		} catch (Exception e) {
@@ -145,7 +177,8 @@ public class EventRepository {
 
 		return updateStatus;
 	}
-@Transactional
+
+	@Transactional
 	public int deleteById(long eventId) {
 
 		EventDTO eventDTO = findById(eventId);
@@ -153,24 +186,21 @@ public class EventRepository {
 		if (eventDTO == null) {
 			return 0;
 		}
-		
+
 		/*
 		 * int count= eventImageRepository.getCountByEventId(eventId);
 		 * 
 		 * if(count>0) { logger.info("count : {} ", count); return -1; }
 		 */
-		
-		
-		
+
 		eventImageRepository.deleteByEventId(eventId);
-		
+
 		final String userQuery = "DELETE FROM event WHERE id=:eventId";
 
 		final SqlParameterSource parameters = new MapSqlParameterSource("eventId", eventId);
 
 		final int deleteStatus = namedParameterJdbcTemplate.update(userQuery, parameters);
 
-	
 		logger.info("deleteStatus : {} ", deleteStatus);
 		return deleteStatus;
 	}

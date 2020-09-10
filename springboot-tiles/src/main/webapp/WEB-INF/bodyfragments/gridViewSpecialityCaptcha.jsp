@@ -103,20 +103,20 @@
 									<c:forEach items="${specialityCaptchaGridData }"
 										var="specialityCaptcha">
 										<tr>
-											<td>${specialityCaptcha.id}</td>
-											<td>${specialityCaptcha.captchaText}</td>
-											<td>${specialityCaptcha.specialityName}</td>
+											<td><span class="badge badge-pill badge-light">${specialityCaptcha.id}</span></td>
+											<td><span class="badge badge-secondary">${specialityCaptcha.captchaText}</span></td>
+											<td><span class="badge badge-secondary">${specialityCaptcha.specialityName}</span></td>
 
-											<th><spring:url
+											<td><span class="badge badge-pill badge-light"><spring:url
 													value="getSpecialityCaptcha/${specialityCaptcha.id }"
 													var="updateURL" /> <a class="btn btn-xs"
 												href="${updateURL }"> <i class="fas fa-edit"></i>
-											</a></th>
-											<th><spring:url
+											</a></span></td>
+											<td><span class="badge badge-pill badge-light"><spring:url
 													value="deleteSpecialityCaptcha/${specialityCaptcha.id }"
 													var="deleteURL" /> <a class="btn btn-xs"
 												href="${deleteURL }"> <i class="fa fa-trash"></i>
-											</a></th>
+											</a></span></td>
 										</tr>
 
 									</c:forEach>

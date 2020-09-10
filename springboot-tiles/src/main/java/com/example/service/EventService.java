@@ -18,5 +18,7 @@ public interface EventService {
 	int deleteByEventImageId(long eventId,long imageId);
 	
 	int update(EventDTO eventDTO);
+	
+	List<EventDTO> findAllByDateRange(String fromDate, String toDate);
 
 }

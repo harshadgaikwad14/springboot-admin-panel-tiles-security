@@ -8,5 +8,6 @@ public interface EventShareService {
 	public long save(EventShare eventShare);
 
 	List<EventShare> findAll();
+	
 
 }

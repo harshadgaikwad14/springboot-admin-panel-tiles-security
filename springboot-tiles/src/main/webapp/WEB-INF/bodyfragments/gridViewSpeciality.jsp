@@ -101,20 +101,20 @@
 								<tbody>
 									<c:forEach items="${specialityGridData }" var="speciality">
 										<tr>
-											<td>${speciality.id}</td>
-											<td>${speciality.name}</td>
-											<th><spring:url value="getSpeciality/${speciality.id }"
+											<td><span class="badge badge-pill badge-light">${speciality.id}</span></td>
+											<td><span class="badge badge-secondary">${speciality.name}</span></td>
+											<td><span class="badge badge-pill badge-light"><spring:url value="getSpeciality/${speciality.id }"
 													var="updateURL" /> <a class="btn btn-xs"
 												href="${updateURL }"> <i class="fas fa-edit"></i>
-											</a></th>
-											<th><spring:url
+											</a></span></td>
+											<td><span class="badge badge-pill badge-light"><spring:url
 													value="deleteSpeciality/${speciality.id }" var="deleteURL" />
 
 
 
 												<a class="btn btn-xs" href="${deleteURL }"> <i
 													class="fa fa-trash"></i>
-											</a></th>
+											</a></span></td>
 										</tr>
 
 									</c:forEach>

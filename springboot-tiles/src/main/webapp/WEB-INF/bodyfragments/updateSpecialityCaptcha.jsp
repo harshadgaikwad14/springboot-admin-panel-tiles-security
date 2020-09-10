@@ -131,9 +131,15 @@
 									<div class="row text-center text-lg-left">
 
 
-										<div class="col-lg-8 col-md-4 col-6">
+										<%-- <div class="col-lg-8 col-md-4 col-6">
 											<img class="img-fluid img-thumbnail"
 												src="${pageContext.request.contextPath}${updateSpecialityCaptchaForm.captchaImagePath}"
+												alt="">
+										</div> --%>
+										
+										<div class="col-lg-8 col-md-4 col-6">
+											<img class="img-fluid img-thumbnail"
+												src="${updateSpecialityCaptchaForm.captchaImagePath}"
 												alt="">
 										</div>
 

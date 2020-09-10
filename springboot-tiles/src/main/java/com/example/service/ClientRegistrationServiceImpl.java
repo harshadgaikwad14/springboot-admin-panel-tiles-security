@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.model.ClientRegistration;
+import com.example.model.Speciality;
 import com.example.model.ValidationError;
 import com.example.repository.ClientRegistratationRepository;
 
@@ -15,6 +16,9 @@ import com.example.repository.ClientRegistratationRepository;
 public class ClientRegistrationServiceImpl implements ClientRegistrationService {
 	@Autowired
 	private ClientRegistratationRepository clientRegistratationRepository;
+	
+	@Autowired
+	private SpecialityService specialityService;
 
 	@Override
 	public long save(ClientRegistration clientRegistration) {
@@ -97,6 +101,18 @@ public class ClientRegistrationServiceImpl implements ClientRegistrationService 
 				validationError.setRejectedValue(clientRegistration.getSpeciality());
 				validationErrors.add(validationError);
 
+			}
+			else
+			{
+				final Speciality speciality= specialityService.findById(clientRegistration.getSpeciality());
+				if(speciality==null)
+				{
+					ValidationError validationError = new ValidationError();
+					validationError.setField("speciality");
+					validationError.setMessage("speciality is invalid");
+					validationError.setRejectedValue(clientRegistration.getSpeciality());
+					validationErrors.add(validationError);
+				}
 			}
 		} else {
 			ValidationError validationError = new ValidationError();

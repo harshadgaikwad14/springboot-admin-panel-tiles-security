@@ -105,18 +105,7 @@
 									<form:errors path="image"></form:errors>
 								</div>
 
-								<%-- <div class="form-group col-md-6">
-									<label for="eventImagesLabel">Images</label>
-
-									<div class="custom-file">
-										<form:input type="file" path="images" multiple="multiple"
-											class="custom-file-input" placeholder="Upload Mutiple Images"
-											id="images"></form:input>
-										<label class="custom-file-label" for="customFile">Choose
-											file</label>
-										<form:errors path="images"></form:errors>
-									</div>
-								</div> --%>
+								
 
 							</spring:bind>
 						</div>

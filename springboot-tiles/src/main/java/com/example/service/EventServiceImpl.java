@@ -57,4 +57,10 @@ public class EventServiceImpl implements EventService {
 		// TODO Auto-generated method stub
 		return eventRepository.update(eventDTO);
 	}
+
+	@Override
+	public List<EventDTO> findAllByDateRange(String fromDate, String toDate) {
+		// TODO Auto-generated method stub
+		return eventRepository.findAllByDateRange(fromDate, toDate);
+	}
 }

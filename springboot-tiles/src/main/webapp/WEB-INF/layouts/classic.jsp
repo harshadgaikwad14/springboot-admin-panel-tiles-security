@@ -135,6 +135,8 @@
 <script>
 	$(function() {
 
+
+		
 		 //Date range picker
 	    $('#eventDate').datetimepicker({
 	        format: 'YYYY-MM-DD'

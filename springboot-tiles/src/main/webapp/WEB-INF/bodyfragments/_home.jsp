@@ -52,22 +52,27 @@
 									<tr>
 										<th>EventShareId</th>
 										<th>EventShareDate</th>
+										<th>EventId</th>
 										<th>EventName</th>
 										<th>EventDate</th>
+										<th>ClientId</th>
 										<th>ClientName</th>
 										<th>EventShareCount</th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${eventShareGridData }" var="eventShare">
+									<c:forEach items="${eventShareGridData }" var="eventShare" >
 										<tr>
-											<td>${eventShare.eventShareId}</td>
-											<td>${eventShare.eventShareDate}</td>
-											<td>${eventShare.eventName}</td>
-											<td>${eventShare.eventDate}</td>
-											<td>${eventShare.drName}</td>
-											<td>${eventShare.eventShareCount}</td>
+											<td><span class="badge badge-pill badge-light">${eventShare.eventShareId}</span></td>
+											<td><span class="badge badge-secondary">${eventShare.eventShareDate}</span></td>
+											<td><span class="badge badge-pill badge-light">${eventShare.eventId}</span></td>
+											<td><span class="badge badge-secondary">${eventShare.eventName}</span></td>
+											
+											<td><span class="badge badge-secondary">${eventShare.eventDate}</span></td>
+											<td><span class="badge badge-pill badge-light">${eventShare.clientId}</span></td>
+											<td><span class="badge badge-secondary">${eventShare.drName}</span></td>
+											<td><span class="badge badge-pill badge-info">${eventShare.eventShareCount}</span></td>
 											
 											
 										</tr>
@@ -78,10 +83,13 @@
 									<tr>
 										<th>EventShareId</th>
 										<th>EventShareDate</th>
+										<th>EventId</th>
 										<th>EventName</th>
 										<th>EventDate</th>
+										<th>ClientId</th>
 										<th>ClientName</th>
 										<th>EventShareCount</th>
+
 
 									</tr>
 								</tfoot>

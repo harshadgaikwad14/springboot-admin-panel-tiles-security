@@ -102,18 +102,18 @@
 								<tbody>
 									<c:forEach items="${eventGridData }" var="event">
 										<tr>
-											<td>${event.id}</td>
-											<td>${event.name}</td>
-											<td>${event.eventDate}</td>
+											<td><span class="badge badge-pill badge-light">${event.id}</span></td>
+											<td><span class="badge badge-secondary">${event.name}</span></td>
+											<td><span class="badge badge-secondary">${event.eventDate}</span></td>
 
-											<th><spring:url value="getEvent/${event.id }"
+											<td><span class="badge badge-pill badge-light"><spring:url value="getEvent/${event.id }"
 													var="updateURL" /> <a class="btn btn-xs"
 												href="${updateURL }"> <i class="fas fa-edit"></i>
-											</a></th>
-											<th><spring:url value="deleteEvent/${event.id }"
+											</a></span></td>
+											<td><span class="badge badge-pill badge-light"><spring:url value="deleteEvent/${event.id }"
 													var="deleteURL" /> <a class="btn btn-xs"
 												href="${deleteURL }"> <i class="fa fa-trash"></i>
-											</a></th>
+											</a></span></td>
 										</tr>
 
 									</c:forEach>

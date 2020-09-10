@@ -143,9 +143,18 @@
 										<c:forEach items="${eventImageMap}" var="entry">
 
 
-											<div class="col-lg-2 col-md-4 col-6">
+											<%-- <div class="col-lg-2 col-md-4 col-6">
 												<img class="img-fluid img-thumbnail"
 													src="${pageContext.request.contextPath}${entry.value}"
+													alt=""> <a
+													href="${pageContext.request.contextPath}/deleteEventImage/${updateEventForm.id}/${entry.key}"
+													class="d-block mb-4 h-100">Remove</a>
+													
+											</div> --%>
+											
+											<div class="col-lg-2 col-md-4 col-6">
+												<img class="img-fluid img-thumbnail"
+													src="${entry.value}"
 													alt=""> <a
 													href="${pageContext.request.contextPath}/deleteEventImage/${updateEventForm.id}/${entry.key}"
 													class="d-block mb-4 h-100">Remove</a>
