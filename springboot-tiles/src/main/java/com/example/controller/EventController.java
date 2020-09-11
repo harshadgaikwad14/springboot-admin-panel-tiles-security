@@ -194,7 +194,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/getEvent/{id}", method = RequestMethod.GET)
-	public ModelAndView getEvent(@PathVariable long id) {
+	public ModelAndView getEvent(@PathVariable long id,@RequestParam(required = false) String message) {
 
 		logger.info("getSpecialityCaptcha - id : {}", id);
 
@@ -212,6 +212,7 @@ public class EventController {
 
 		model.addObject("eventImageMap", eventImageMap);
 		model.addObject("updateEventForm", event);
+		model.addObject("message", message);
 		model.setViewName("updateEventPage");
 
 		return model;
@@ -255,10 +256,20 @@ public class EventController {
 		logger.info("deleteEvent - id {} : ", id);
 		logger.info("deleteEvent - imageId {} : ", imageId);
 		int deleteStatus = eventService.deleteByEventImageId(id,imageId);
-		
+		String message = "DELETE_FAILED";
+
+		if (deleteStatus == -1) {
+
+			message = "INUSED";
+
+		} else if (deleteStatus == 1) {
+
+			message = "DELETE_SUCCESS";
+
+		}
 		
 
-		return new ModelAndView("redirect:/getEvent/"+id).addObject("deleteStatus", deleteStatus);
+		return new ModelAndView("redirect:/getEvent/"+id+"?message="+message);
 	}
 
 }

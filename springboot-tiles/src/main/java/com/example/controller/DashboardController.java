@@ -23,7 +23,7 @@ public class DashboardController {
 
 	@GetMapping(value = { "/", "/home" })
 	public ModelAndView gridViewEvent(@RequestParam(required = false) String message) {
-		final ModelAndView model = new ModelAndView("homePage");
+		final ModelAndView model = new ModelAndView("dashBoardPage");
 
 		final List<EventShare> eventShares = eventShareService.findAll();
 

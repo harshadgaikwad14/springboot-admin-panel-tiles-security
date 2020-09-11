@@ -62,6 +62,46 @@
 
 
 							</c:if>
+							
+							<c:if test="${message == 'INUSED'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Event Already In Use.
+							</div>
+
+						</c:if>
+
+						<c:if test="${message == 'DELETE_SUCCESS'}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Event Image Deleted Successfully.
+							</div>
+
+						</c:if>
+
+						<c:if test="${message == 'FAILED'}">
+							<div class="alert alert-warning alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+
+								Event Failed To Delete.
+							</div>
+
+						</c:if>
+							
 							<div class="row">
 								<div class="col-md-6">
 

@@ -17,25 +17,42 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/basefragments/_footer.jsp" />
 	</definition>
+	
+	<!-- Home Page -->
+	<definition name="genericErrorPage" extends="base.definition">
+		<put-attribute name="title" value="Error Page" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/genericError.jsp" />
+	</definition>
+	
+	<!-- Home Page -->
+	<definition name="400ErrorPage" extends="base.definition">
+		<put-attribute name="title" value="400 Error Page" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/400Error.jsp" />
+	</definition>
+	
+	<!-- Home Page -->
+	<definition name="500ErrorPage" extends="base.definition">
+		<put-attribute name="title" value="500 Error Page" />
+		<put-attribute name="body"
+			value="/WEB-INF/bodyfragments/500Error.jsp" />
+	</definition>
+	
 
 	<!-- Home Page -->
-	<definition name="homePage" extends="base.definition">
-		<put-attribute name="title" value="Home Page" />
+	<definition name="dashBoardPage" extends="base.definition">
+		<put-attribute name="title" value="DashBoard Page" />
 		<put-attribute name="body"
-			value="/WEB-INF/bodyfragments/_home.jsp" />
+			value="/WEB-INF/bodyfragments/dashBoard.jsp" />
 	</definition>
 
-	<!-- ContactUs Page -->
-	<definition name="contactusPage" extends="base.definition">
-		<put-attribute name="title" value="Contact Us" />
-		<put-attribute name="body"
-			value="/WEB-INF/bodyfragments/_contactus.jsp" />
-	</definition>
+	
 	
 	<definition name="createSpecialityPage" extends="base.definition">
 		<put-attribute name="title" value="Create Speciality" />
 		<put-attribute name="body"
-			value="/WEB-INF/bodyfragments/create_speciality.jsp" />
+			value="/WEB-INF/bodyfragments/createSpeciality.jsp" />
 	</definition>
 	<definition name="updateSpecialityPage" extends="base.definition">
 		<put-attribute name="title" value="Update Speciality" />
@@ -55,7 +72,7 @@
 	<definition name="createEventPage" extends="base.definition">
 		<put-attribute name="title" value="Create Event" />
 		<put-attribute name="body"
-			value="/WEB-INF/bodyfragments/create_event.jsp" />
+			value="/WEB-INF/bodyfragments/createEvent.jsp" />
 	</definition>
 	
 	
