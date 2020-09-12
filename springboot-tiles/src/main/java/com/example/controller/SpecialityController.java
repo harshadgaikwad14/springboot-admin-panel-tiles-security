@@ -47,7 +47,7 @@ public class SpecialityController {
 		if (bindingResult.hasErrors()) {
 
 			ModelAndView model = new ModelAndView();
-			model.addObject("createSpecialityPage", createSpecialityForm);
+			model.addObject("createSpecialityForm", createSpecialityForm);
 			model.setViewName("createSpecialityPage");
 			return model;
 		}

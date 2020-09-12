@@ -17,7 +17,7 @@ public class TilesConfiguration {
  
         // TilesView 3
         viewResolver.setViewClass(TilesView.class);
- 
+        viewResolver.setOrder(1);
         return viewResolver;
     }
  
@@ -38,6 +38,7 @@ public class TilesConfiguration {
         configurer.setDefinitions(new String[] { "/WEB-INF/tiles.xml" });
     	//configurer.setDefinitions("classpath:tiles.xml");
         configurer.setCheckRefresh(true);
+       
         return configurer;
     }
      

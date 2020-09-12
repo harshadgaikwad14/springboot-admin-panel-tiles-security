@@ -10,20 +10,22 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <div class="register-logo">
-	<a href="../../index2.html"><b>Cair</b>Event</a>
+	<a href="#"><b>Cair</b>Event</a>
 </div>
 
 <div class="card">
 	<div class="card-body register-card-body">
 		<p class="login-box-msg">Register a new membership</p>
 
-		<form:form method="POST" action="${pageContext.request.contextPath}/admin/panel/registration" modelAttribute="userForm" class="form-signin">
-			
-			
-			
-			
-			
-			
+		<form:form method="POST"
+			action="${pageContext.request.contextPath}/admin/panel/registration"
+			modelAttribute="userForm" class="form-signin">
+
+
+
+
+
+
 			<spring:bind path="username">
 				<div class="input-group mb-3 ${status.error ? 'has-error' : ''}">
 
@@ -38,8 +40,10 @@
 					</div>
 
 
-					<form:errors path="username"></form:errors>
+					
+
 				</div>
+				<span><form:errors path="username"></form:errors></span>
 			</spring:bind>
 
 
@@ -53,10 +57,12 @@
 							<span class="fas fa-lock"></span>
 						</div>
 					</div>
-					<span><form:errors path="password"></form:errors></span>
+
+				
 
 
 				</div>
+					<span><form:errors path="password"></form:errors></span>
 			</spring:bind>
 			<spring:bind path="passwordConfirm">
 				<div class="input-group mb-3 ${status.error ? 'has-error' : ''}">
@@ -67,9 +73,12 @@
 							<span class="fas fa-lock"></span>
 						</div>
 					</div>
-					<span><form:errors path="passwordConfirm"></form:errors></span>
+
+				
+
 
 				</div>
+					<span><form:errors path="passwordConfirm"></form:errors></span>
 			</spring:bind>
 			<div class="row">
 				<div class="col-8">
@@ -88,8 +97,8 @@
 		</form:form>
 
 
-		<a href="${contextPath}/admin/panel/login" class="text-center">I already have
-			a membership</a>
+		<a href="${contextPath}/admin/panel/login" class="text-center">I
+			already have a membership</a>
 	</div>
 	<!-- /.form-box -->
 </div>

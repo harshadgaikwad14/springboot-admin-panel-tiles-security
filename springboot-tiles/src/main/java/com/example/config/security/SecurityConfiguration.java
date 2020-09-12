@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 
 		super.configure(web);
-		 web.ignoring().antMatchers("/api/public/**","/resources/**","/static/images/**");
+		 web.ignoring().antMatchers("/api/public/**","/resources/**","/static/images/**","/error");
 		web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
 	}
 

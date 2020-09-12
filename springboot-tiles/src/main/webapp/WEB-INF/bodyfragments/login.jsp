@@ -1,7 +1,7 @@
 
 
 <div class="login-logo">
-	<a href="../../index2.html"><b>Cair</b>Event</a>
+	<a href="#"><b>Cair</b>Event</a>
 </div>
 <!-- /.login-logo -->
 <div class="card">
