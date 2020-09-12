@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import com.example.validator.UserValidator;
 @Controller
 @RequestMapping("/admin/panel")
 public class AdminUserController {
+	
+	private static final Logger logger = LogManager.getLogger(AdminUserController.class);
+	
 	@Autowired
 	private UserService userService;
 
@@ -30,6 +35,9 @@ public class AdminUserController {
 
 	@GetMapping("/registration")
 	public String registration(Model model) {
+		
+		logger.info("get admin panel user registration page");
+		
 		model.addAttribute("userForm", new User());
 
 		return "registrationPage";
@@ -37,6 +45,10 @@ public class AdminUserController {
 
 	@PostMapping("/registration")
 	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+		
+		logger.info("save admin panel user registration page");
+		
+		
 		userValidator.validate(userForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
@@ -52,6 +64,9 @@ public class AdminUserController {
 
 	@GetMapping("/login")
 	public String login(Model model, String error, String logout) {
+		
+		logger.info("get admin panel login page");
+		
 		if (error != null)
 			model.addAttribute("error", "Your username and password is invalid.");
 

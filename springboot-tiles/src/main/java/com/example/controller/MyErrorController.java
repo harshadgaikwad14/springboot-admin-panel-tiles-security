@@ -58,7 +58,7 @@ public class MyErrorController implements ErrorController {
 				return "500ErrorPage";
 			}
 		}
-		return "genericErrorPage";
+		return "500ErrorPage";
 	}
 
 	@Override

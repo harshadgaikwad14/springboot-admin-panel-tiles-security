@@ -1,5 +1,7 @@
 package com.example.config.security;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +16,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+	private static final Logger logger = LogManager.getLogger(SecurityConfiguration.class);
+
 	@Qualifier("userDetailsServiceImpl")
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -27,26 +31,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/resources/**", "/admin/panel/registration", "/plugins/**", "/dist/**").permitAll()
-				
-				.anyRequest().authenticated().and().formLogin().loginPage("/admin/panel/login").permitAll()
-				.and().logout().permitAll();
+		
+		logger.info("role based configuration");
+		
+		http.authorizeRequests().antMatchers("/resources/**", "/admin/panel/registration", "/plugins/**", "/dist/**")
+				.permitAll()
+
+				.anyRequest().authenticated().and().formLogin().loginPage("/admin/panel/login").permitAll().and()
+				.logout().permitAll();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 
 		super.configure(web);
-		 web.ignoring().antMatchers("/api/public/**","/resources/**","/static/images/**","/error");
+		web.ignoring().antMatchers("/api/public/**", "/resources/**", "/static/images/**", "/error");
 		web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
 	}
 
-	
 	@Bean
 	public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
 

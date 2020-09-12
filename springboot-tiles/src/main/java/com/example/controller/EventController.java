@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,14 +35,14 @@ import com.example.service.EventService;
 @Controller
 public class EventController {
 
-	Logger logger = LoggerFactory.getLogger(EventController.class);
+	private static final Logger logger = LogManager.getLogger(AdminUserController.class);
 
 	@Autowired
 	private EventService eventService;
 
 	@GetMapping("/createEvent")
 	public String getEvent(Model model) {
-		logger.info("getSpeciality - get called");
+		logger.info("get create event page");
 		model.addAttribute("createEventForm", new Event());
 
 		return "createEventPage";
@@ -52,7 +52,7 @@ public class EventController {
 	public ModelAndView createEvent(HttpServletRequest servletRequest,
 			@ModelAttribute("createEventForm") Event createEventForm) {
 
-		logger.info("createEvent - createEventForm : {}", createEventForm);
+		logger.info("save new event : {}", createEventForm);
 
 		// Get the uploaded files and store them
 		List<MultipartFile> files = createEventForm.getImages();
@@ -108,12 +108,12 @@ public class EventController {
 
 		return model;
 	}
-	
+
 	@PostMapping("/updateEvent")
 	public ModelAndView updateEvent(HttpServletRequest servletRequest,
 			@ModelAttribute("updateEventForm") Event updateEventForm) {
 
-		logger.info("createEvent - updateEventForm : {}", updateEventForm);
+		logger.info("update existing event : {}", updateEventForm);
 
 		// Get the uploaded files and store them
 		List<MultipartFile> files = updateEventForm.getImages();
@@ -124,8 +124,7 @@ public class EventController {
 
 				String fileName = multipartFile.getOriginalFilename();
 
-				if(!StringUtils.isEmpty(fileName))
-				{
+				if (!StringUtils.isEmpty(fileName)) {
 					fileNames.add("/static/images/upload/" + uniquePath + "/" + fileName);
 
 					/* create image directory **/
@@ -146,7 +145,7 @@ public class EventController {
 						e.printStackTrace();
 					}
 				}
-				
+
 			}
 		}
 
@@ -154,9 +153,8 @@ public class EventController {
 		eventDTO.setId(updateEventForm.getId());
 		eventDTO.setName(updateEventForm.getEventName());
 		eventDTO.setEventDate(updateEventForm.getEventDate());
-		
-		if(!CollectionUtils.isEmpty(fileNames))
-		{
+
+		if (!CollectionUtils.isEmpty(fileNames)) {
 			List<EventImageDTO> images = new ArrayList<>();
 			for (String fileName : fileNames) {
 				EventImageDTO e = new EventImageDTO();
@@ -167,7 +165,7 @@ public class EventController {
 
 			eventDTO.setImages(images);
 		}
-		
+
 		final long eventId = eventService.update(eventDTO);
 
 		ModelAndView model = new ModelAndView();
@@ -175,7 +173,7 @@ public class EventController {
 
 			model.addObject("generatedEventName", updateEventForm.getEventName());
 		}
-		
+
 		EventDTO exEventDTO = eventService.findById(updateEventForm.getId());
 		logger.info("getEvent - eventDTO : {}", eventDTO);
 		Event event = new Event();
@@ -189,25 +187,25 @@ public class EventController {
 		model.addObject("eventImageMap", eventImageMap);
 		model.addObject("updateEventForm", event);
 		model.setViewName("updateEventPage");
-		
+
 		return model;
 	}
 
 	@RequestMapping(value = "/getEvent/{id}", method = RequestMethod.GET)
-	public ModelAndView getEvent(@PathVariable long id,@RequestParam(required = false) String message) {
+	public ModelAndView getEvent(@PathVariable long id, @RequestParam(required = false) String message) {
 
-		logger.info("getSpecialityCaptcha - id : {}", id);
+		logger.info("get event details for id : {}", id);
 
-		ModelAndView model = new ModelAndView();
+		final ModelAndView model = new ModelAndView();
 
-		EventDTO eventDTO = eventService.findById(id);
-		logger.info("getEvent - eventDTO : {}", eventDTO);
+		final EventDTO eventDTO = eventService.findById(id);
+		logger.debug("getEvent - eventDTO : {}", eventDTO);
 		Event event = new Event();
 		event.setId(eventDTO.getId());
 		event.setEventName(eventDTO.getName());
 		event.setEventDate(eventDTO.getEventDate());
 
-		Map<Long, String> eventImageMap = eventDTO.getImages().stream()
+		final Map<Long, String> eventImageMap = eventDTO.getImages().stream()
 				.collect(Collectors.toMap(EventImageDTO::getId, EventImageDTO::getImageUrl));
 
 		model.addObject("eventImageMap", eventImageMap);
@@ -220,6 +218,9 @@ public class EventController {
 
 	@GetMapping(value = "/gridViewEvent")
 	public ModelAndView gridViewEvent(@RequestParam(required = false) String message) {
+
+		logger.info("get event grid data");
+
 		final ModelAndView model = new ModelAndView("gridViewEventPage");
 
 		final List<EventDTO> events = eventService.findAll();
@@ -233,7 +234,7 @@ public class EventController {
 	@GetMapping(value = "/deleteEvent/{id}")
 	public ModelAndView deleteEvent(@PathVariable("id") long id) {
 
-		logger.info("deleteEvent - id {} : ", id);
+		logger.info("delete event for id : {} ", id);
 		int deleteStatus = eventService.deleteById(id);
 		String message = "FAILED";
 
@@ -249,13 +250,13 @@ public class EventController {
 
 		return new ModelAndView("redirect:/gridViewEvent?message=" + message);
 	}
-	
-	@GetMapping(value = "/deleteEventImage/{id}/{imageId}")
-	public ModelAndView deleteEventImage(@PathVariable("id") long id,@PathVariable("imageId") long imageId) {
 
-		logger.info("deleteEvent - id {} : ", id);
-		logger.info("deleteEvent - imageId {} : ", imageId);
-		int deleteStatus = eventService.deleteByEventImageId(id,imageId);
+	@GetMapping(value = "/deleteEventImage/{id}/{imageId}")
+	public ModelAndView deleteEventImage(@PathVariable("id") long id, @PathVariable("imageId") long imageId) {
+
+		logger.info("delete image id : {}  for event id : {} ", imageId, id);
+
+		int deleteStatus = eventService.deleteByEventImageId(id, imageId);
 		String message = "DELETE_FAILED";
 
 		if (deleteStatus == -1) {
@@ -267,9 +268,8 @@ public class EventController {
 			message = "DELETE_SUCCESS";
 
 		}
-		
 
-		return new ModelAndView("redirect:/getEvent/"+id+"?message="+message);
+		return new ModelAndView("redirect:/getEvent/" + id + "?message=" + message);
 	}
 
 }
