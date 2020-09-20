@@ -40,7 +40,7 @@ public class MyErrorController implements ErrorController {
 
 		Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
 		if (exception != null) {
-
+			exception.printStackTrace();
 			logger.info("exception : {}", exception.getMessage());
 		}
 

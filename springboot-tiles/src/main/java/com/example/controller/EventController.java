@@ -127,9 +127,7 @@ public class EventController {
 				if (!StringUtils.isEmpty(fileName)) {
 					fileNames.add("/static/images/upload/" + uniquePath + "/" + fileName);
 
-					/* create image directory **/
-					// File imageDir = new
-					// File(servletRequest.getServletContext().getRealPath("WEB-INF"), "image");
+					
 					File imageDir = new File(servletRequest.getServletContext().getRealPath("static"),
 							"images/upload/" + uniquePath);
 					logger.info("createEvent - imageDir : {}", imageDir);
